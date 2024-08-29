@@ -4,8 +4,7 @@ const { google } = require("googleapis");
 const SCOPES = ["https://www.googleapis.com/auth/calendar.events.public.readonly"];
 
 // Extracting configuration variables
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env;
 const redirect_uris = ["https://crrenatacr.github.io/meet/"];
 
 // Creating the OAuth2 client with credentials and redirect URI
