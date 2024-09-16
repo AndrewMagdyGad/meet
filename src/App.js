@@ -1,16 +1,18 @@
-// Import the main CSS file for the App component
+// Import the EventList component from the components directory
+import EventList from './components/EventList';
+// Import the main CSS file for styling the App component
 import './App.css';
 
-// Define the App component as a functional component using an arrow function
+// Define the App component using an arrow function
 const App = () => {
-  // Return the JSX that describes the UI structure
+  // Return the JSX structure, with the EventList component inside a div with class "App"
   return (
     <div className="App">
-      {/* This div will contain the list of events */}
-      <div id="event-list"></div>
+      {/* Render the EventList component */}
+      <EventList />
     </div>
   );
-};
+}
 
-// Export the App component to make it available for import in other files
+// Export the App component so it can be imported and used in other parts of the application
 export default App;
