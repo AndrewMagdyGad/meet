@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
+// Event component to display event details
 const Event = ({ event }) => {
   // State to track whether event details are shown
   const [showDetails, setShowDetails] = useState(false);
 
   // Function to toggle the event details
   const toggleDetails = () => {
-    setShowDetails(!showDetails);
+    setShowDetails(prevShowDetails => !prevShowDetails); // Use prev state to toggle
   };
 
   return (

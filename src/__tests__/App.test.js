@@ -1,23 +1,25 @@
-import { render } from '@testing-library/react'; // Import render from testing-library
+import { render, screen } from '@testing-library/react'; // Import necessary testing utilities
 import App from '../App'; // Import the App component
 
 describe('<App /> component', () => {
-  let AppDOM;
-
-  beforeEach(() => {
-    AppDOM = render(<App />).container.firstChild; // Render the App component and get the first child
-  });
-
+  // Test to check if the event list is rendered correctly
   test('renders list of events', () => {
-    expect(AppDOM.querySelector('#event-list')).toBeInTheDocument(); // Check if the event list is in the document
+    render(<App />); // Render the App component
+    // Check if the event list is present in the document
+    expect(screen.getByRole('list')).toBeInTheDocument(); // Use getByRole for the event list
   });
 
+  // Test to check if the CitySearch component is rendered correctly
   test('renders CitySearch', () => {
-    expect(AppDOM.querySelector('#city-search')).toBeInTheDocument(); // Check if CitySearch is in the document
+    render(<App />); // Render the App component
+    // Check if the CitySearch input is present in the document
+    expect(screen.getByRole('textbox')).toBeInTheDocument(); // Use getByRole for the text input
   });
 
   // New test to check if the NumberOfEvents component is rendered correctly
   test('renders NumberOfEvents', () => {
-    expect(AppDOM.querySelector('#number-of-events')).toBeInTheDocument(); // Check if NumberOfEvents is in the document
+    render(<App />); // Render the App component
+    // Check if the NumberOfEvents is present in the document
+    expect(screen.getByTestId('number-of-events')).toBeInTheDocument(); // Check if NumberOfEvents is in the document
   });
 });
