@@ -15,8 +15,13 @@ const Event = ({ event }) => {
       <h3 className="event-title">{event.summary}</h3>
       <p className="event-location">{event.location}</p>
       <p className="event-date">
-        {new Date(event.start.dateTime).toLocaleString()} -{' '}
-        {new Date(event.end.dateTime).toLocaleString()}
+        {/* Formatting the date to en-US to ensure consistent testing */}
+        {new Date(event.start.dateTime).toLocaleString("en-US", {
+          timeZone: event.start.timeZone,
+        })} -{' '}
+        {new Date(event.end.dateTime).toLocaleString("en-US", {
+          timeZone: event.end.timeZone,
+        })}
       </p>
 
       {/* Button to show/hide details */}
