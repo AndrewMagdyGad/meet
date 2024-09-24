@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="App">
       {/* Render the NumberOfEvents component */}
-      <NumberOfEvents /> {/* Adicionando o componente aqui */}
+      <NumberOfEvents /> 
       {/* Render the CitySearch component */}
       <CitySearch />
       {/* Render the EventList component */}
