@@ -30,7 +30,7 @@ const CitySearch = ({ allLocations }) => {
   };
 
   return (
-    <div id="city-search">
+    <div id="city-search" data-testid="city-search"> {/* Added data-testid for testing */}
       {/* Input field for city search */}
       <input
         type="text"
@@ -59,4 +59,4 @@ const CitySearch = ({ allLocations }) => {
   );
 };
 
-export default CitySearch;
+export default CitySearch; // Export the component for use in other parts of the app
