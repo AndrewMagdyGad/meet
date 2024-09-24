@@ -12,14 +12,14 @@ describe('<App /> component', () => {
   // Test to check if the CitySearch component is rendered correctly
   test('renders CitySearch', () => {
     render(<App />); // Render the App component
-    // Check if the CitySearch input is present in the document
-    expect(screen.getByRole('textbox')).toBeInTheDocument(); // Use getByRole for the text input
+    // Check if the CitySearch component is present in the document using data-testid
+    expect(screen.getByTestId('city-search')).toBeInTheDocument(); // Check if CitySearch is in the document
   });
 
   // New test to check if the NumberOfEvents component is rendered correctly
   test('renders NumberOfEvents', () => {
     render(<App />); // Render the App component
-    // Check if the NumberOfEvents is present in the document
+    // Check if the NumberOfEvents component is present in the document using data-testid
     expect(screen.getByTestId('number-of-events')).toBeInTheDocument(); // Check if NumberOfEvents is in the document
   });
 });
