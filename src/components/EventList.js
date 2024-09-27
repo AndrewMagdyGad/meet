@@ -1,15 +1,15 @@
-// src/components/EventList.js
-
-import Event from "./Event";
+import React from 'react';
 
 const EventList = ({ events }) => {
- return (
-   <ul id="event-list">
-     {events ?
-       events.map(event => <Event key={event.id} event={event} />) :
-       null}
-   </ul>
- );
-}
+  return (
+    <ul id="event-list" aria-label="event list"> {/* Add aria-label here */}
+      {events.map((event) => (
+        <li key={event.id} role="listitem">
+          {event.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default EventList;
