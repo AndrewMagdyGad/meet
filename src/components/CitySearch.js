@@ -1,11 +1,15 @@
-// Importing useState hook from React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CitySearch = ({ allLocations }) => {
   // Defining state variables: query, suggestions, and showSuggestions
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState(""); // State for the input field value
   const [suggestions, setSuggestions] = useState([]); // State for the filtered location suggestions
+
+  // Update suggestions when allLocations prop changes
+  useEffect(() => {
+    setSuggestions(allLocations); // Initialize suggestions with allLocations
+  }, [allLocations]); // Dependency array ensures this runs whenever allLocations changes
 
   // Function to handle input field changes and update suggestions
   const handleInputChanged = (event) => {

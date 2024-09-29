@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react'; // Import React hooks
 import CitySearch from './components/CitySearch'; // Import CitySearch component
 import EventList from './components/EventList'; // Import EventList component
 import NumberOfEvents from './components/NumberOfEvents'; // Import NumberOfEvents component
-import { getEvents } from './api'; // Import the API function to fetch events
+import { extractLocations, getEvents } from './api'; // Import the API function to fetch events
 import './App.css'; // Import the main CSS file for styling
 
 // Main application component
@@ -13,28 +13,31 @@ const App = () => {
   // State to store the current number of events to display, default is 32
   const [currentNOE, setCurrentNOE] = useState(32); // Default number of events to show is 32
 
+  // State to store all locations extracted from events
+  const [allLocations, setAllLocations] = useState([]); // Initially an empty array for all locations
+
   /**
    * Function to fetch events data from the API.
-   * Wrapped in useCallback to avoid re-creating the function on every render.
-   * This function will fetch all events and then set only the first 'currentNOE' events.
+   * This function will fetch all events and then set the events to display based on currentNOE.
    */
   const fetchData = useCallback(async () => {
     const allEvents = await getEvents(); // Fetch all events from the API
     setEvents(allEvents.slice(0, currentNOE)); // Set the events to display based on currentNOE
+    setAllLocations(extractLocations(allEvents)); // Extract and set all locations from the fetched events
   }, [currentNOE]); // The function depends on 'currentNOE', so it will re-run when it changes
 
   /**
    * useEffect hook to call fetchData when the component is mounted or when 'currentNOE' changes.
-   * This ensures that the list of events is fetched either on mount or when the user changes the number of events to display.
+   * This ensures that the list of events and locations is fetched either on mount or when the user changes the number of events to display.
    */
   useEffect(() => {
-    fetchData(); // Call fetchData to get the initial set of events
+    fetchData(); // Call fetchData to get the initial set of events and locations
   }, [fetchData]); // Dependency array includes 'fetchData' to avoid the linting warning
 
   return (
     <div className="App">
-      {/* Render the CitySearch component */}
-      <CitySearch />
+      {/* Render the CitySearch component, passing allLocations to filter suggestions */}
+      <CitySearch allLocations={allLocations} />
 
       {/* Render the NumberOfEvents component, passing the current number of events and the setter */}
       <NumberOfEvents currentNOE={currentNOE} setCurrentNOE={setCurrentNOE} />
