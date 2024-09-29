@@ -4,6 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 
 import '@testing-library/jest-dom';
+import { act } from 'react'; // Importing act from React
 
 // Adding portions of the warning messages to intentionally prevent from appearing
 const MESSAGES_TO_IGNORE = [
@@ -17,4 +18,4 @@ const originalError = console.error.bind(console.error);
 console.error = (...args) => {
   const ignoreMessage = MESSAGES_TO_IGNORE.find(message => args.toString().includes(message));
   if (!ignoreMessage) originalError(...args);
-}
+};

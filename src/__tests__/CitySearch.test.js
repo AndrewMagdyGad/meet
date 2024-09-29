@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'; // Import testing utilities
+import { render, screen, within, waitFor } from '@testing-library/react'; // Import testing utilities
 import userEvent from '@testing-library/user-event'; // Import userEvent for simulating user actions
 import CitySearch from '../components/CitySearch'; // Import the CitySearch component
 import { getEvents, extractLocations } from '../api';
@@ -84,7 +84,10 @@ describe('<CitySearch /> integration', () => {
     const allEvents = await getEvents(); // Fetch all events
     const allLocations = extractLocations(allEvents); // Extract locations
 
-    const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem'); // Get all suggestion items
-    expect(suggestionListItems.length).toBe(allLocations.length + 1); // Check if the number of suggestions matches
+    // Wait for the suggestions list to be populated with items
+    await waitFor(() => {
+      const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem'); // Get all suggestion items
+      expect(suggestionListItems.length).toBe(allLocations.length + 1); // Check if the number of suggestions matches
+    });
   });
 });
