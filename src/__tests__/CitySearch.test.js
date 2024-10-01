@@ -1,32 +1,31 @@
-import { render, screen, within, waitFor } from '@testing-library/react'; // Import testing utilities
+import { render, within, screen, waitFor } from '@testing-library/react'; // Import testing utilities
 import userEvent from '@testing-library/user-event'; // Import userEvent for simulating user actions
 import CitySearch from '../components/CitySearch'; // Import the CitySearch component
-import { getEvents, extractLocations } from '../api';
 import App from '../App'; // Import the App component for integration tests
+import { extractLocations, getEvents } from '../api'; // Import API functions
 
 describe('<CitySearch /> component', () => {
   let allLocations; // Variable to hold all location names
+  let CitySearchComponent; // Variable to store the rendered CitySearch component
 
   beforeEach(() => {
     allLocations = ['Berlin', 'Paris', 'Madrid']; // Sample locations
+    CitySearchComponent = render(<CitySearch allLocations={allLocations} />); // Render the component with sample locations
   });
 
   test('renders text input', () => {
-    render(<CitySearch allLocations={allLocations} />); // Render the component with locations
     const cityTextBox = screen.getByRole('textbox'); // Get the input element
     expect(cityTextBox).toBeInTheDocument(); // Check if the input is in the document
     expect(cityTextBox).toHaveClass('city'); // Verify the input has the correct class
   });
 
   test('suggestions list is hidden by default', () => {
-    render(<CitySearch allLocations={allLocations} />);
     const suggestionList = screen.queryByRole('list'); // Get the suggestion list
     expect(suggestionList).not.toBeInTheDocument(); // Check that it is not in the document
   });
 
   test('renders a list of suggestions when city textbox gains focus', async () => {
     const user = userEvent.setup(); // Setup user event simulation
-    render(<CitySearch allLocations={allLocations} />);
 
     const cityTextBox = screen.getByRole('textbox');
     await user.click(cityTextBox); // Simulate click on the input
@@ -37,8 +36,6 @@ describe('<CitySearch /> component', () => {
 
   test('updates list of suggestions correctly when user types in city textbox', async () => {
     const user = userEvent.setup();
-    render(<CitySearch allLocations={allLocations} />);
-
     const cityTextBox = screen.getByRole('textbox');
     await user.type(cityTextBox, "Berlin"); // Simulate typing "Berlin"
 
@@ -55,11 +52,6 @@ describe('<CitySearch /> component', () => {
 
   test('renders the suggestion text in the textbox upon clicking on the suggestion', async () => {
     const user = userEvent.setup(); // Setup for simulating user actions
-    const allEvents = await getEvents(); // Fetch all events from the API
-    allLocations = extractLocations(allEvents); // Extract unique locations from the events
-
-    render(<CitySearch allLocations={allLocations} />); // Render the CitySearch component with the fetched locations
-
     const cityTextBox = screen.getByRole('textbox'); // Get the text box by its role
     await user.type(cityTextBox, "Berlin"); // Simulate typing 'Berlin' in the textbox
 
@@ -71,6 +63,7 @@ describe('<CitySearch /> component', () => {
   });
 });
 
+// Integration tests
 describe('<CitySearch /> integration', () => {
   test('renders suggestions list when the app is rendered.', async () => {
     const user = userEvent.setup();
