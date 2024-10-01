@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.event-list {
+  list-style-type: none; /* Remove as bolinhas */
+  padding: 0;           /* Remove o padding padrão */
+  margin: 0;            /* Remove a margem padrão */
+}
