@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getEvents, extractLocations } from './api';
-import CitySearch from './CitySearch';
-import NumberOfEvents from './NumberOfEvents';
-import EventList from './EventList';
+import { getEvents, extractLocations } from '../api';
+import CitySearch from '../components/CitySearch';
+import NumberOfEvents from '../components/NumberOfEvents'; 
+import EventList from '../components/EventList'; 
+import { render, screen } from '@testing-library/react';
 
 const App = () => {
   const [allLocations, setAllLocations] = useState([]);
@@ -32,5 +33,19 @@ const App = () => {
     </div>
   );
 }
+
+describe('App Component', () => {
+  test('renders App without crashing', () => {
+    render(<App />); // Renders the App
+
+    // Verifies if the search input is present
+    const cityInput = screen.getByPlaceholderText(/search for a city/i);
+    expect(cityInput).toBeInTheDocument(); 
+
+    // Verifies if the input of event numbers is present
+    const numberOfEventsInput = screen.getByTestId('number-of-events');
+    expect(numberOfEventsInput).toBeInTheDocument(); 
+  });
+});
 
 export default App;
