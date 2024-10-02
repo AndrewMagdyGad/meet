@@ -18,6 +18,7 @@ export const getAccessToken = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
     if (!code) {
+      const encodeCode = encodeURIComponent(code);
       const response = await fetch(
         'https://8ojt5ejoff.execute-api.eu-central-1.amazonaws.com/dev/api/token'+ '/' + encodeCode
   
