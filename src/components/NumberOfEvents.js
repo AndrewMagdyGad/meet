@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
 // Component to select the number of events
-const NumberOfEvents = ({ onNumberChange }) => {
+const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
   // State to keep track of the number of events, defaulting to 32
-  const [numberOfEvents, setNumberOfEvents] = useState(32); 
+  const [numberOfEvents, setNumberOfEvents] = useState(currentNOE); 
 
   // Handle input change
   const handleInputChange = (event) => {
     const value = event.target.value; // Get the new value from the input
     setNumberOfEvents(value); // Update state with new value
-    if (onNumberChange) {
-      onNumberChange(value); // Call onNumberChange if passed as prop
-    }
+    setCurrentNOE(value); // Update the current number of events in parent component
   };
 
   return (
@@ -27,4 +25,4 @@ const NumberOfEvents = ({ onNumberChange }) => {
   );
 };
 
-export default NumberOfEvents; // Export the component for use in other parts of the app
+export default NumberOfEvents; // Export the component for use in other parts of the app.
