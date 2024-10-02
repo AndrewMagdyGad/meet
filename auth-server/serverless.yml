@@ -17,7 +17,8 @@ functions:
       - http:
           path: api/get-auth-url # HTTP path that triggers the function
           method: get # HTTP method to trigger the function
-
+          cors: true
+          
   getAccessToken:
     handler: handler.getAccessToken # Specifies the function handler in handler.js
     events:
