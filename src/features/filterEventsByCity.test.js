@@ -7,10 +7,10 @@ const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
 defineFeature(feature, test => {
 
-  // Test 1: When user hasn’t searched for a city, show upcoming events from all cities
+  // Test 1:
   test('When user hasn’t searched for a city, show upcoming events from all cities.', ({ given, when, then }) => {
     
-    // Step 'given' for no city search
+    
     given('user hasn’t searched for any city', () => {
       // No specific action needed for this step
     });
@@ -21,16 +21,17 @@ defineFeature(feature, test => {
       AppComponent = render(<App />);
     });
 
-    // Ajustando o nome do passo 'then' para coincidir com o arquivo .feature
+    
     then('the user should see the list of all upcoming events.', async () => {
-      const AppDOM = AppComponent.container.firstChild;
-      const EventListDOM = AppDOM.querySelector('#event-list');
-      
-      await waitFor(() => {
-        const EventListItems = within(EventListDOM).queryAllByRole('listitem');
-        expect(EventListItems.length).toBe(32);
+        const AppDOM = AppComponent.container.firstChild;
+        const EventListDOM = AppDOM.querySelector('#event-list');
+  
+        await waitFor(() => {
+          const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+          expect(EventListItems.length).toBe(32);
+        });
+  
       });
-    });
   });
 
   // Test 2: User should see a list of suggestions when they search for a city
@@ -43,7 +44,7 @@ defineFeature(feature, test => {
       // Simulate typing in city textbox
     });
 
-    then('the user should recieve a list of cities (suggestions) that match what they’ve typed', () => {
+    then('the user should receive a list of cities (suggestions) that match what they’ve typed', () => {
       // Verify that a list of city suggestions appears
     });
   });
