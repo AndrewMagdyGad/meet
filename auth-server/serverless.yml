@@ -17,7 +17,6 @@ functions:
       - http:
           path: api/get-auth-url # HTTP path that triggers the function
           method: get # HTTP method to trigger the function
-          cors: true # CORS enabled for this function
 
   getAccessToken:
     handler: handler.getAccessToken # Specifies the function handler in handler.js
@@ -25,7 +24,6 @@ functions:
       - http:
           path: api/token/{code} # HTTP path that includes a dynamic 'code' parameter
           method: get # HTTP method to trigger the function
-          cors: true # CORS enabled for this function
 
   getCalendarEvents:
     handler: handler.getCalendarEvents # Specifies the function handler in handler.js
@@ -33,4 +31,3 @@ functions:
       - http:
           path: api/get-events/{access_token} # HTTP path that includes a dynamic 'access_token' parameter
           method: get # HTTP method to trigger the function
-          cors: true # CORS enabled for this function

@@ -91,11 +91,18 @@ const removeQuery = () => {
 
 // Function to get the token from the code
 const getToken = async (code) => {
+  const  encodeCode = encodeURIComponent(code);
   const response = await fetch(
-    `https://8ojt5ejoff.execute-api.eu-central-1.amazonaws.com/dev/api/token`
+    `https://8ojt5ejoff.execute-api.eu-central-1.amazonaws.com/dev/api/token/${encodeCode}`,{
+      method:'GET',
+      mode:'no-cors',
+      headers:{
+        'Access-Control-Allow-Origin':'*'
+      }}
   ); // Use template literals for URL
-  const { access_token } = await response.json(); // Destructure access_token from response
-  access_token && localStorage.setItem("access_token", access_token); // Store access token if it exists
+  console.log('response: ', response);
+ const { access_token } = await response.json(); // Destructure access_token from response
+ access_token && localStorage.setItem("access_token", access_token); // Store access token if it exists
 
-  return access_token; // Return the access token
+ return access_token; // Return the access token
 };
