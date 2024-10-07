@@ -36,6 +36,11 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* Welcome message and instructions for the user */}
+      <h1>Welcome to Meet App</h1>
+      <p>Find the best events in your city!</p>
+      <p>Use the dropdown to select a city and choose how many events you want to see.</p>
+
       {/* Render the CitySearch component, passing allLocations to filter suggestions */}
       <CitySearch allLocations={allLocations} />
 
