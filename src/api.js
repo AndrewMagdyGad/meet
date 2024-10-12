@@ -8,6 +8,7 @@
  */
 
 import mockData from './mock-data';
+import NProgress from 'nprogress';
 
 // This function retrieves the access token from localStorage and checks if it's valid
 export const getAccessToken = async () => {
@@ -48,8 +49,10 @@ const checkToken = async (accessToken) => {
  * This function will fetch the list of all events
  */
 export const getEvents = async () => {
+  NProgress.start();
   // Check if running on localhost and return mock data
   if (window.location.href.startsWith("http://localhost")) {
+    NProgress.done();
     return mockData;
   }
 
