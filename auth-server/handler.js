@@ -23,6 +23,7 @@ module.exports.getAuthURL = async () => {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
+    prompt: 'consent'
   });
 
   // Returning the authentication URL in JSON format
@@ -42,12 +43,13 @@ module.exports.getAuthURL = async () => {
 module.exports.getAccessToken = async (event) => {
   // Decode the authorization code extracted from the URL query
   const code = decodeURIComponent(`${event.pathParameters.code}`);
-
+  console.log('cod#1: ', code);
   return new Promise((resolve, reject) => {
     /**
      * Exchange the authorization code for an access token with a “callback” after the exchange.
      * The callback here is an arrow function with the results as parameters: “error” and “response”.
      */
+    console.log('code#2: ', code);
     oAuth2Client.getToken(code, (error, response) => {
       if (error) {
         // Reject the promise if there is an error
@@ -61,6 +63,7 @@ module.exports.getAccessToken = async (event) => {
       // Respond with the OAuth token
       return {
         statusCode: 200,
+        mode:'no-cors',
         headers: {
           "Access-Control-Allow-Origin": "*", // Enabling CORS
           "Access-Control-Allow-Credentials": true,
