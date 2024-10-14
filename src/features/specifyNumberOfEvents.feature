@@ -10,6 +10,6 @@ Feature: Specify Number of Events
         Given event app is displayed
         And user has loaded the list of events
         When user specifies a number of events to display
-        Then app should display the specified number of events, up to 32
+        Then app should display the specified number of events, up to 36
 
 

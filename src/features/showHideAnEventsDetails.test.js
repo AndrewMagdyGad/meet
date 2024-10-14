@@ -25,7 +25,7 @@ defineFeature(feature, (test) => {
       const EventListDOM = AppDOM.querySelector('#event-list');  // Locate the event list in the DOM
       await waitFor(() => {
         const EventListItem = within(EventListDOM).getAllByRole('listitem');  // Get all event items
-        expect(EventListItem).toHaveLength(32);  // Assuming there are 32 events to display
+        expect(EventListItem).toHaveLength(32);  // Assuming there are 36 events to display
       });
     });
 
