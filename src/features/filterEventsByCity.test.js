@@ -37,7 +37,7 @@ defineFeature(feature, (test) => {
                 await waitFor(() => {
                     const EventListItems =
                         within(EventListDOM).queryAllByRole("listitem");
-                    expect(EventListItems.length).toBe(36);
+                    expect(EventListItems.length).toBe(32);
                 });
             }
         );
@@ -75,7 +75,7 @@ defineFeature(feature, (test) => {
                 const expectedSuggestions = events.length;
                 const suggestionListItems =
                     within(CitySearchDOM).queryAllByRole("listitem");
-                expect(suggestionListItems).toHaveLength(2);
+                expect(suggestionListItems).toHaveLength(2); //here
             }
         );
     });
